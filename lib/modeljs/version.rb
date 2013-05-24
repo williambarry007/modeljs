@@ -1,0 +1,3 @@
+module Modeljs
+  VERSION = "0.0.1"
+end
