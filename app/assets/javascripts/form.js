@@ -50,8 +50,12 @@ Model.Form = Class.extend({
       .append($('<table/>').append(tbody))
       .append($('<div/>').attr('id', this.message_div))
       .append($('<p/>')
-        .append($('<input/>').attr('type', 'submit').val('Add ' + m.name).click(function() { m.ajax_add(); }))
-        .append($('<input/>').attr('type', 'button').val('Back').click(function() { window.location = m.listing_url; }))
+        .append($('<input/>').attr('type', 'button').val('Back').click(function() {
+          obj = Model.parse_url(m.listing_url);
+          window.location = obj.url; 
+        }))
+        .append(' ')
+        .append($('<input/>').attr('type', 'submit').val('Add ' + m.name).click(function() { m.ajax_add(); }))        
       );
     return form;
   },
@@ -79,7 +83,10 @@ Model.Form = Class.extend({
       .append($('<table/>').append(tbody))
       .append($('<div/>').attr('id', this.message))
       .append($('<p/>')
-        .append($('<input/>').attr('type', 'button').val('Back').click(function() { window.location = m.listing_url; }))
+        .append($('<input/>').attr('type', 'button').val('Back').click(function() {
+          var obj = Model.parse_url(m.listing_url);
+          window.location = obj.url; 
+        }))
         .append(' ')
         .append($('<input/>').attr('type', 'button').val('Delete ' + m.name).click(function() { m.ajax_delete(); }))
       );

@@ -350,6 +350,11 @@ Model.prototype = {
     attrib.loading();
     this2 = this;
     data = attrib.form_values();
+    
+    for (var thing in data)
+      if (data[thing].constructor.name == 'Array' && data[thing].length == 0)
+        data[thing] = null;
+    
 		obj = Model.parse_url(attrib.update_url ? attrib.update_url : this.update_url, this.id);
     $.ajax({
       url: obj.url,

@@ -68,7 +68,7 @@ Model.Attribute.Image = Model.Attribute.extend({
       .append($('<input/>').attr('type', 'submit').val('Update').addClass('update_btn').click(function() { this2.loading('Uploading...');     }))
       .append($('<input/>').attr('type', 'button').val('Cancel').addClass('cancel_btn').click(function() { this2.model.show_attribute(this2); }));
     form.append(controls);
-    form.append($('<span/>').attr('id', attrib.message));
+    form.append($('<span/>').attr('id', this.message));
     return form;
   },
   
@@ -97,7 +97,7 @@ Model.Attribute.Image = Model.Attribute.extend({
 		{
 		  if (resp.attribute)
 		    for (var thing in resp.attribute)
-		      attrib[thing] = resp.attribute[thing];
+		      this[thing] = resp.attribute[thing];
 			this.model.show_attribute(this);
 		}
   }
