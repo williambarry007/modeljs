@@ -70,6 +70,7 @@ Model.prototype = {
   form: 'Model.Form', // Name of the class that generates add/edit forms for the model
   back_button_click: false, // Click handler for the back button
   show_delete_button: true, // Whether or not we should show the delete button on the main model
+  show_back_button: true, // Whether or not we should show the back button on the main model
   
   // Urls of CRUD events
   create_url: false,

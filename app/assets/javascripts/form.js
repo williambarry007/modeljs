@@ -4,6 +4,7 @@ Author: William Barry (william@nine.is)
 Description: Abstract form class to encapsulate add and edit forms for models.
 */
 
+
 Model.Form = Class.extend({
     
   class_name: 'Model.Form',
@@ -82,14 +83,18 @@ Model.Form = Class.extend({
     var div = $('<div/>')
       .append($('<table/>').append(tbody))
       .append($('<div/>').attr('id', this.message));
-    var p = $('<p/>')
-    var back = $('<input/>')
-      .attr('type', 'button')
-      .val('Back')
-      .click(m.back_button_click ? m.back_button_click : function() { window.location = Model.parse_url(m.listing_url).url; });
-    p.append(back).append(' ');
-    if (m.show_delete_button)
-      p.append($('<input/>').attr('type', 'button').val('Delete ' + m.name).click(function() { m.ajax_delete(); }));
+    if (m.show_back_button || m.show_delete_button)
+	{
+	  var p = $('<p/>')
+      if (m.show_back_button)
+	  {
+      	if (!m.back_button_click)
+		  m.back_button_click = function() { window.location = Model.parse_url(m.listing_url).url; };
+        p.append($('<input/>').attr('type', 'button').val('Back').click(m.back_button_click));
+        p.append(' ');
+      }
+      if (m.show_delete_button)
+      	p.append($('<input/>').attr('type', 'button').val('Delete ' + m.name).click(function() { m.ajax_delete(); }));
     div.append(p);
     return div;
   },
