@@ -81,15 +81,16 @@ Model.Form = Class.extend({
     
     var div = $('<div/>')
       .append($('<table/>').append(tbody))
-      .append($('<div/>').attr('id', this.message))
-      .append($('<p/>')
-        .append($('<input/>').attr('type', 'button').val('Back').click(function() {
-          var obj = Model.parse_url(m.listing_url);
-          window.location = obj.url; 
-        }))
-        .append(' ')
-        .append($('<input/>').attr('type', 'button').val('Delete ' + m.name).click(function() { m.ajax_delete(); }))
-      );
+      .append($('<div/>').attr('id', this.message));
+    var p = $('<p/>')
+    var back = $('<input/>')
+      .attr('type', 'button')
+      .val('Back')
+      .click(m.back_button_click ? m.back_button_click : function() { window.location = Model.parse_url(m.listing_url).url; });
+    p.append(back).append(' ');
+    if (m.show_delete_button)
+      p.append($('<input/>').attr('type', 'button').val('Delete ' + m.name).click(function() { m.ajax_delete(); }));
+    div.append(p);
     return div;
   },
   
