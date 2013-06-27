@@ -1,6 +1,7 @@
 
 Model.Attribute.Text = Model.Attribute.extend({
     
+  show_placeholder: true,
   show_reminder: true,
 	
   view: function()
@@ -28,6 +29,7 @@ Model.Attribute.Text = Model.Attribute.extend({
   		.attr('type', 'text')
   		.attr('id', this.base)
   		.attr('name', this.base)
+  		.attr('placeholder', this.nice_name)
   		.val(this.value);
   	if (this.show_reminder)
   		input.keyup(function (){ this2.flash_reminder(); })
