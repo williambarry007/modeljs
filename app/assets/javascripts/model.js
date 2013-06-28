@@ -71,6 +71,7 @@ Model.prototype = {
   back_button_click: false, // Click handler for the back button
   show_delete_button: true, // Whether or not we should show the delete button on the main model
   show_back_button: true, // Whether or not we should show the back button on the main model
+  finished_loading: false, // When the model finishes loading initially
   
   // Urls of CRUD events
   create_url: false,
@@ -126,7 +127,10 @@ Model.prototype = {
     
     if      (!this.is_listing && $('#' + this.name + '_listing_container').length && this.listing_url)  this.listing();
     if      ($('#' + this.name + '_new_container').length)                          this.add_form();
-    else if ($('#' + this.name + '_' + this.id + '_container').length)              this.edit_form();    
+    else if ($('#' + this.name + '_' + this.id + '_container').length)              this.edit_form();
+
+    if (this.finished_loading)
+      this.finished_loading();
   },
   
   listing: function()
